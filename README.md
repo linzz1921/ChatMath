@@ -13,13 +13,13 @@
 
 - [📖 Overview](#-Overview)
 - [🛠️ Operations](#%EF%B8%8F-Operations)
-  * [Quick Start](#Quick Start)
+  * [Quick_Start](#Quick Start)
   * [Re-training](#Re-training)
-    + [Environment Setup](#Environment Setup)
+    + [Environment_Setup](#Environment Setup)
     + [Fine-tuning](#Fine-tuning)
     + [Quantization](#Quantization)
     + [Evaluation](#Evaluation)
-    + [Quantization and Evaluation](#Quantization and Evaluation)
+    + [Quantization_and_Evaluation](#Quantization and Evaluation)
 
 
 
@@ -66,8 +66,8 @@ pip install xtuner
 xtuner list-cfg
 xtuner list-cfg
 
-mkdir -p /root/chatmath/data
-mkdir /root/chatmath/config && cd /root/chatmath/config
+mkdir -p /root/ChatMath/data
+mkdir /root/ChatMath/config && cd /root/ChatMath/config
 
 xtuner copy-cfg internlm2_chat_7b_qlora_oasst1_e3 .
 ```
@@ -76,14 +76,14 @@ xtuner copy-cfg internlm2_chat_7b_qlora_oasst1_e3 .
 
 
 ```bash
-mkdir -p /root/chatmath/model
+mkdir -p /root/ChatMath/model
 ```
 
 ```python
 import torch
 from modelscope import snapshot_download, AutoModel, AutoTokenizer
 import os
-model_dir = snapshot_download('Shanghai_AI_Laboratory/internlm2-math-7b', cache_dir='/root/chatmath/model')
+model_dir = snapshot_download('Shanghai_AI_Laboratory/internlm2-math-7b', cache_dir='/root/ChatMath/model')
 ```
 
 
@@ -94,7 +94,7 @@ Here, you must modify the paths of pretrained_model_name_or_path and data_path.
 
 
 ```bash
-cd /root/chatmath/config
+cd /root/ChatMath
 vim internlm_chat_7b_qlora_oasst1_e3_copy.py
 ```
 
@@ -111,7 +111,7 @@ vim internlm_chat_7b_qlora_oasst1_e3_copy.py
 4. Start fine-tuning
 
 ```bash
-xtuner train /root/math/config/internlm2_chat_7b_qlora_oasst1_e3_copy.py
+xtuner train /root/ChatMath/internlm2_chat_7b_qlora_oasst1_e3_copy.py
 ```
 
 5. Convert the PTH model to a HuggingFace model
@@ -131,7 +131,7 @@ export NAME_OR_PATH_TO_LLM=/root/math/model/Shanghai_AI_Laboratory/internlm2-mat
 
 export NAME_OR_PATH_TO_ADAPTER=/root/math/config/hf
 
-mkdir /root/math/config/work_dirs/hf_merge
+mkdir /root/ChatMath/work_dirs/hf_merge
 export SAVE_PATH=/root/math/config/work_dirs/hf_merge
 
 xtuner convert merge \
